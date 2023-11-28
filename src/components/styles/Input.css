@@ -1,0 +1,23 @@
+.Input > * {
+  outline: none;
+  border: 1px solid #fff;
+  background-color: black;
+  border-radius: 0.5rem;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+.Input > .input {
+  max-width: 50%;
+  min-width: 30%;
+}
+
+.Input > .button {
+  margin: 0 1rem;
+  transition: opacity, scale 300ms ease;
+}
+
+.Input > .button:hover {
+  opacity: 0.7;
+  scale: 1.1;
+}

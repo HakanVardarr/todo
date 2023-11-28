@@ -1,0 +1,35 @@
+.Todo {
+  max-width: 100%;
+  min-height: 75px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #fff;
+  padding: 1rem;
+  margin: 0.3rem 0;
+  transition: scale 300ms ease;
+}
+
+.Todo:hover {
+  scale: 1.01;
+}
+
+.Todo > .content {
+  max-width: 90%;
+  overflow: scroll;
+}
+
+.Todo > .deleteButton {
+  font-size: 2rem;
+  border: none;
+  font-weight: 800;
+  background-color: black;
+  cursor: pointer;
+  transition: color, scale 300ms ease;
+}
+
+.Todo > .deleteButton:hover {
+  color: grey;
+  scale: 1.3;
+}
