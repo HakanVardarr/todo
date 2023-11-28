@@ -1,5 +1,5 @@
 import "./styles/Header.css";
-import GitLogo from "../../public/github-mark.svg";
+import GitLogo from "../assets/github-mark.svg";
 
 export default function Header() {
   return (
