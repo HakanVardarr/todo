@@ -1,17 +1,17 @@
 class TodoService {
+  apiUrlBegining = "https://todo-app-hakan.fly.dev";
   getJWT() {
     const JWT = localStorage.getItem("JWT");
     return JWT !== null ? JSON.parse(JWT) : null;
   }
 
   async getTodos() {
-    const apiUrl = "https://todo-api-hakan.fly.dev/todos";
+    const apiUrl = `${this.apiUrlBegining}/todos`;
     const JWT = this.getJWT();
 
     if (JWT !== null) {
       const headers = new Headers();
       headers.append("Authorization", `Bearer: ${JWT}`);
-      headers.append("Origin", "https://todoapph.netlify.app");
 
       try {
         const response = await fetch(apiUrl, {
@@ -35,14 +35,14 @@ class TodoService {
   }
 
   async addTodoToServer(newTodo: string) {
-    const apiUrl = "https://todo-api-hakan.fly.dev/todos";
+    const apiUrl = `${this.apiUrlBegining}/todos`;
     const JWT = this.getJWT();
 
     if (JWT !== null) {
       const headers = new Headers();
       headers.append("Authorization", `Bearer: ${JWT}`);
       headers.append("Content-Type", "application/json");
-      headers.append("Origin", "https://todoapph.netlify.app");
+
       try {
         const response = await fetch(apiUrl, {
           method: "POST",
@@ -68,11 +68,11 @@ class TodoService {
     const JWT = this.getJWT();
 
     if (JWT !== null) {
-      const apiUrl = `https://todo-api-hakan.fly.dev/todos/${todoId}`;
+      const apiUrl = `${this.apiUrlBegining}/todos/${todoId}`;
+
       const headers = new Headers();
       headers.append("Authorization", `Bearer: ${JWT}`);
       headers.append("Content-Type", "application/json");
-      headers.append("Origin", "https://todoapph.netlify.app");
 
       try {
         const response = await fetch(apiUrl, {
@@ -92,11 +92,10 @@ class TodoService {
     }
   }
   async login(username: string, password: string) {
-    const apiUrl = "https://todo-api-hakan.fly.dev/login";
+    const apiUrl = `${this.apiUrlBegining}/login`;
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Access-Control-Allow-Headers", "Authorization");
-    headers.append("Origin", "https://todoapph.netlify.app");
 
     try {
       const response = await fetch(apiUrl, {
@@ -118,7 +117,7 @@ class TodoService {
     }
   }
   async register(username: string, password: string) {
-    const apiUrl = "https://todo-api-hakan.fly.dev/register";
+    const apiUrl = `${this.apiUrlBegining}/register`;
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Access-Control-Allow-Headers", "Authorization");

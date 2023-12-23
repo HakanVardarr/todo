@@ -51,7 +51,7 @@ function Register() {
 
   return (
     <>
-      <Header loggedIn={loggedIn} />
+      <Header loggedIn={loggedIn} username="" />
       <Container>
         <h1>Register</h1>
         <div className="Register">

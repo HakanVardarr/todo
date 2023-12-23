@@ -51,7 +51,7 @@ function Login() {
 
   return (
     <>
-      <Header loggedIn={loggedIn} />
+      <Header loggedIn={loggedIn} username="" />
       <Container>
         <h1>Login</h1>
         <div className="Login">

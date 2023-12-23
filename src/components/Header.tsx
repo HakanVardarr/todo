@@ -3,19 +3,16 @@ import GitLogo from "../assets/github-mark.svg";
 
 type Props = {
   loggedIn: boolean;
+  username: string;
 };
 
-export default function Header({ loggedIn }: Props) {
+export default function Header({ loggedIn, username }: Props) {
   return (
     <>
       <header className="Header">
         <h1>Todo App</h1>
         <ul className="navlink">
-          <li>
-            <a href="https://github.com/HakanVardarr">
-              <img className="logo" src={GitLogo} alt="GitLogo" />
-            </a>
-          </li>
+          <li>{username !== "" ? <h2>{username}</h2> : <></>}</li>
           <li>
             {loggedIn ? (
               <a
@@ -29,6 +26,11 @@ export default function Header({ loggedIn }: Props) {
             ) : (
               <></>
             )}
+          </li>
+          <li>
+            <a href="https://github.com/HakanVardarr">
+              <img className="logo" src={GitLogo} alt="GitLogo" />
+            </a>
           </li>
         </ul>
       </header>
