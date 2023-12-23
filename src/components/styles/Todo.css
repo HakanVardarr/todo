@@ -17,7 +17,7 @@
 
 .Todo > .content {
   max-width: 90%;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .Todo > .deleteButton {
