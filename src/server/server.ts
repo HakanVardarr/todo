@@ -1,5 +1,5 @@
 class TodoService {
-  apiUrlBegining = "https://todo-app-hakan.fly.dev";
+  apiUrlBegining = "https://todo-api-hakan.fly.dev";
   getJWT() {
     const JWT = localStorage.getItem("JWT");
     return JWT !== null ? JSON.parse(JWT) : null;
