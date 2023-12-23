@@ -42,6 +42,10 @@ function Todo() {
 
   // Todo Functions
   const handleAddTodo = async (newTodo: string) => {
+    if (newTodo.length > 50) {
+      return;
+    }
+
     let data = await todoService.addTodoToServer(newTodo);
     setTodos(
       data.map((todo: String, index: number) => ({
