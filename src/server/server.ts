@@ -5,7 +5,7 @@ class TodoService {
   }
 
   async getTodos() {
-    const apiUrl = "http://localhost:8080/todos";
+    const apiUrl = "https://todo-api-hakan.fly.dev/todos";
     const JWT = this.getJWT();
 
     if (JWT !== null) {
@@ -34,7 +34,7 @@ class TodoService {
   }
 
   async addTodoToServer(newTodo: string) {
-    const apiUrl = "http://localhost:8080/todos";
+    const apiUrl = "https://todo-api-hakan.fly.dev/todos";
     const JWT = this.getJWT();
 
     if (JWT !== null) {
@@ -67,7 +67,7 @@ class TodoService {
     const JWT = this.getJWT();
 
     if (JWT !== null) {
-      const apiUrl = `http://localhost:8080/todos/${todoId}`;
+      const apiUrl = `https://todo-api-hakan.fly.dev/todos/${todoId}`;
       const headers = new Headers();
       headers.append("Authorization", `Bearer: ${JWT}`);
       headers.append("Content-Type", "application/json");
@@ -90,7 +90,7 @@ class TodoService {
     }
   }
   async login(username: string, password: string) {
-    const apiUrl = "http://localhost:8080/login";
+    const apiUrl = "https://todo-api-hakan.fly.dev/login";
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Access-Control-Allow-Headers", "Authorization");
@@ -115,7 +115,7 @@ class TodoService {
     }
   }
   async register(username: string, password: string) {
-    const apiUrl = "http://localhost:8080/register";
+    const apiUrl = "https://todo-api-hakan.fly.dev/register";
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Access-Control-Allow-Headers", "Authorization");
