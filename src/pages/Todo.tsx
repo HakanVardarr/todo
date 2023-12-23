@@ -44,15 +44,15 @@ function Todo() {
   const handleAddTodo = async (newTodo: string) => {
     if (newTodo.length > 50) {
       return;
+    } else {
+      let data = await todoService.addTodoToServer(newTodo);
+      setTodos(
+        data.map((todo: String, index: number) => ({
+          id: index,
+          todo: todo,
+        }))
+      );
     }
-
-    let data = await todoService.addTodoToServer(newTodo);
-    setTodos(
-      data.map((todo: String, index: number) => ({
-        id: index,
-        todo: todo,
-      }))
-    );
   };
 
   const handleRemoveTodo = async (todoId: number) => {
