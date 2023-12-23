@@ -1,12 +1,11 @@
 class TodoService {
-  apiUrl = "https://todo-api-hakan.fly.dev/todos";
-
   getJWT() {
     const JWT = localStorage.getItem("JWT");
     return JWT !== null ? JSON.parse(JWT) : null;
   }
 
   async getTodos() {
+    const apiUrl = "http://localhost:8080/todos";
     const JWT = this.getJWT();
 
     if (JWT !== null) {
@@ -14,13 +13,13 @@ class TodoService {
       headers.append("Authorization", `Bearer: ${JWT}`);
 
       try {
-        const response = await fetch(this.apiUrl, {
+        const response = await fetch(apiUrl, {
           method: "GET",
           headers: headers,
         });
 
         if (!response.ok) {
-          throw new Error(`HTTP Error! Status: ${response.status}`);
+          return null;
         }
 
         const data = await response.json();
@@ -28,15 +27,14 @@ class TodoService {
           id: index,
           todo: todo,
         }));
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
+      } catch (error) {}
     }
 
-    return [];
+    return null;
   }
 
   async addTodoToServer(newTodo: string) {
+    const apiUrl = "http://localhost:8080/todos";
     const JWT = this.getJWT();
 
     if (JWT !== null) {
@@ -45,7 +43,7 @@ class TodoService {
       headers.append("Content-Type", "application/json");
 
       try {
-        const response = await fetch(this.apiUrl, {
+        const response = await fetch(apiUrl, {
           method: "POST",
           headers: headers,
           body: JSON.stringify({
@@ -69,7 +67,7 @@ class TodoService {
     const JWT = this.getJWT();
 
     if (JWT !== null) {
-      const apiUrl = `${this.apiUrl}/${todoId}`;
+      const apiUrl = `http://localhost:8080/todos/${todoId}`;
       const headers = new Headers();
       headers.append("Authorization", `Bearer: ${JWT}`);
       headers.append("Content-Type", "application/json");
@@ -89,6 +87,56 @@ class TodoService {
       } catch (err) {
         console.error(err);
       }
+    }
+  }
+  async login(username: string, password: string) {
+    const apiUrl = "http://localhost:8080/login";
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Access-Control-Allow-Headers", "Authorization");
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
+
+      if (!response.ok) {
+        return null;
+      }
+
+      return response.headers.get("authorization");
+    } catch (error) {
+      return null;
+    }
+  }
+  async register(username: string, password: string) {
+    const apiUrl = "http://localhost:8080/register";
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Access-Control-Allow-Headers", "Authorization");
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
+
+      if (!response.ok) {
+        return null;
+      }
+
+      return response.headers.get("authorization");
+    } catch (error) {
+      return null;
     }
   }
 }

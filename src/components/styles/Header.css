@@ -6,13 +6,30 @@
   justify-content: space-between;
 }
 
-.Header > a > .logo {
+.Header > .navlink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.Header > .navlink > li {
+  margin: 0 1rem;
+  list-style: none;
+}
+
+.Header > .navlink > li > a {
+  text-decoration: none;
+}
+
+.Header > .navlink > li > a:hover {
+  opacity: 0.5;
+}
+
+.Header > .navlink > li > a > .logo {
   height: 3rem;
   aspect-ratio: 1;
   transition: opacity, scale 300ms ease;
 }
 
-.Header > a > .logo:hover {
-  opacity: 0.5;
+.Header > .navlink > li > a > .logo:hover {
   scale: 1.1;
 }
