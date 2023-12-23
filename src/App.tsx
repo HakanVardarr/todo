@@ -38,6 +38,65 @@ async function getTodos() {
   return [];
 }
 
+async function addTodoToServer(newTodo: String) {
+  const apiUrl = "https://todo-api-hakan.fly.dev/todos";
+  const JWT = localStorage.getItem("JWT");
+
+  if (JWT !== null) {
+    let token: string = JSON.parse(JWT);
+    const headers = new Headers();
+    headers.append("Authorization", `Bearer: ${token}`);
+    headers.append("Content-Type", "application/json");
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({
+          content: newTodo,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
+
+async function deleteTodo(todoId: number) {
+  const apiUrl = `https://todo-api-hakan.fly.dev/todos/${todoId}`;
+  const JWT = localStorage.getItem("JWT");
+
+  if (JWT !== null) {
+    let token: string = JSON.parse(JWT);
+    const headers = new Headers();
+    headers.append("Authorization", `Bearer: ${token}`);
+    headers.append("Content-Type", "application/json");
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "DELETE",
+        headers: headers,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
+
 function App() {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [loading, setLoading] = useState(true);
@@ -52,13 +111,24 @@ function App() {
   }, []);
 
   // Todo Functions
-  const addTodo = (newTodo: string) => {
-    setTodos([...todos, { id: Date.now(), todo: newTodo }]);
+  const addTodo = async (newTodo: string) => {
+    let data = await addTodoToServer(newTodo);
+    setTodos(
+      data.map((todo: String, index: number) => ({
+        id: index,
+        todo: todo,
+      }))
+    );
   };
 
-  const removeTodo = (todoId: number) => {
-    let newTodos = todos.filter((todo) => todo.id !== todoId);
-    setTodos(newTodos);
+  const removeTodo = async (todoId: number) => {
+    let data = await deleteTodo(todoId);
+    setTodos(
+      data.map((todo: String, index: number) => ({
+        id: index,
+        todo: todo,
+      }))
+    );
   };
 
   return (
@@ -66,11 +136,7 @@ function App() {
       <Header />
       <Container>
         <Input onClick={addTodo} />
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <Todos todos={todos} onDelete={removeTodo} />
-        )}
+        {loading ? <></> : <Todos todos={todos} onDelete={removeTodo} />}
       </Container>
     </>
   );
