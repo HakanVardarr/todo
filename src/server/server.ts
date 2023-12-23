@@ -11,6 +11,7 @@ class TodoService {
     if (JWT !== null) {
       const headers = new Headers();
       headers.append("Authorization", `Bearer: ${JWT}`);
+      headers.append("Origin", "https://todoapph.netlify.app");
 
       try {
         const response = await fetch(apiUrl, {
@@ -41,7 +42,7 @@ class TodoService {
       const headers = new Headers();
       headers.append("Authorization", `Bearer: ${JWT}`);
       headers.append("Content-Type", "application/json");
-
+      headers.append("Origin", "https://todoapph.netlify.app");
       try {
         const response = await fetch(apiUrl, {
           method: "POST",
@@ -71,6 +72,7 @@ class TodoService {
       const headers = new Headers();
       headers.append("Authorization", `Bearer: ${JWT}`);
       headers.append("Content-Type", "application/json");
+      headers.append("Origin", "https://todoapph.netlify.app");
 
       try {
         const response = await fetch(apiUrl, {
@@ -94,6 +96,7 @@ class TodoService {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Access-Control-Allow-Headers", "Authorization");
+    headers.append("Origin", "https://todoapph.netlify.app");
 
     try {
       const response = await fetch(apiUrl, {
@@ -119,6 +122,7 @@ class TodoService {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Access-Control-Allow-Headers", "Authorization");
+    headers.append("Origin", "https://todoapph.netlify.app");
 
     try {
       const response = await fetch(apiUrl, {
