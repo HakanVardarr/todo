@@ -66,6 +66,11 @@ function Register() {
             id="password"
             type="password"
             placeholder="Password"
+            onKeyDown={(e) => {
+              if (e.key == "Enter") {
+                handleButtonClick();
+              }
+            }}
           />
           <button className="button" onClick={handleButtonClick}>
             Sign up
